@@ -1,17 +1,18 @@
 import React from "react";
 import { Box } from "rebass";
+
 const data = [
-  ...Array(10).fill({ speaker: "1" }),
-  ...Array(10).fill({ speaker: "2" }),
-  ...Array(10).fill({ speaker: "1" }),
-  ...Array(10).fill({ speaker: "2" }),
-  ...Array(40).fill({ speaker: "1" }),
-  ...Array(40).fill({ speaker: "2" }),
-  ...Array(40).fill({ speaker: "1" }),
-  ...Array(40).fill({ speaker: "2" }),
-  ...Array(40).fill({ speaker: "1" }),
-  ...Array(40).fill({ speaker: "2" }),
-  ...Array(40).fill({ speaker: "1" })
+  ...Array(10).fill({ speaker: "1", status: "played" }),
+  ...Array(10).fill({ speaker: "2", status: "played" }),
+  ...Array(10).fill({ speaker: "1", status: "played" }),
+  ...Array(10).fill({ speaker: "2", status: "played" }),
+  ...Array(40).fill({ speaker: "1", status: "played" }),
+  ...Array(40).fill({ speaker: "2", status: "unplayed" }),
+  ...Array(40).fill({ speaker: "1", status: "unplayed" }),
+  ...Array(40).fill({ speaker: "2", status: "unplayed" }),
+  ...Array(40).fill({ speaker: "1", status: "unplayed" }),
+  ...Array(40).fill({ speaker: "2", status: "unplayed" }),
+  ...Array(40).fill({ speaker: "1", status: "unplayed" })
 ];
 
 const AudioGraph = () => {
@@ -59,28 +60,36 @@ const AudioGraph = () => {
           }}
         ></Box>
         <Box sx={{ display: "flex", ml: "108px" }}>
-          {data.map(audio => (
-            <Box
-              sx={{
-                position: "relative",
-                width: "2px",
-                height: "55px",
-                backgroundColor: "white",
-                mr: "2px"
-              }}
-            >
+          {data.map(audio => {
+            let backgroundColor = audio.speaker === "1" ? "#8868e9" : "#1a99f6";
+
+            if (audio.status === "played") {
+              backgroundColor = "#b7c0ce";
+            }
+
+            return (
               <Box
                 sx={{
-                  position: "absolute",
+                  position: "relative",
                   width: "2px",
-                  height: "25px",
-                  backgroundColor: "#b7c0ce",
-                  mr: "2px",
-                  bottom: audio.speaker === "1" ? "unset" : "0"
+                  height: "55px",
+                  backgroundColor: "white",
+                  mr: "2px"
                 }}
-              />
-            </Box>
-          ))}
+              >
+                <Box
+                  sx={{
+                    position: "absolute",
+                    width: "2px",
+                    height: "25px",
+                    backgroundColor: backgroundColor,
+                    mr: "2px",
+                    bottom: audio.speaker === "1" ? "unset" : "0"
+                  }}
+                />
+              </Box>
+            );
+          })}
         </Box>
       </Box>
     </Box>
