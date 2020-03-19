@@ -1,7 +1,13 @@
 import React from "react";
 import { Box } from "reflexbox";
 
-const Header = () => {
+/**
+ * This is a React function component.
+ *
+ * @param {Object} props
+ * @param {string} props.speed
+ */
+const Header = ({ speed = "1.0x" }) => {
   return (
     <Box
       sx={{
@@ -73,7 +79,7 @@ const Header = () => {
             marginLeft: "20px"
           }}
         >
-          1.0x
+          {speed}
         </Box>
       </Box>
       <Box
