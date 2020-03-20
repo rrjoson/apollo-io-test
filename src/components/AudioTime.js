@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Box } from "rebass";
 import moment from "moment";
+import { AppContext } from "../App";
 import momentDurationFormatSetup from "moment-duration-format";
 
 const AudioTime = ({ curTime, duration }) => {
+  const context = useContext(AppContext);
+
   const formatDuration = duration => {
     return moment
       .duration(duration, "seconds")
@@ -22,7 +25,7 @@ const AudioTime = ({ curTime, duration }) => {
         }}
       >
         <Box sx={{ p: "3px", fontSize: "12px" }}>
-          <Box as="span">{formatDuration(curTime)}</Box>
+          <Box as="span">{formatDuration(context.curTime)}</Box>
           <Box
             as="span"
             sx={{
@@ -30,7 +33,7 @@ const AudioTime = ({ curTime, duration }) => {
             }}
           >
             {" "}
-            / {formatDuration(duration)}
+            / {formatDuration(context.duration)}
           </Box>
         </Box>
       </Box>
